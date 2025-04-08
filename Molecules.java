@@ -1,5 +1,6 @@
 package Assignment_4;
 
+import java.util.Scanner;
 import java.util.Stack;
 
 public class Molecules {
@@ -17,7 +18,7 @@ public class Molecules {
 		return ans;
 	}
 	
-	//Stack<Integer> massofcomp=new Stack<>();
+	
 	public static int CalculateMass(String s,Stack<Integer> massofcomp) {
 		int idx=0;
 		while(idx<s.length()) {
@@ -31,6 +32,14 @@ public class Molecules {
 			else if(ch=='C' && checkInt(nextCh)) {
 				nextCh-='0';
 				massofcomp.push(12*nextCh);
+				//idx++;
+			}
+			 if(checkInt(ch) && checkInt(nextCh)) {
+				ch-='0';
+				nextCh-='0';
+				int mul=ch*10+nextCh;
+				System.out.println(mul);
+				massofcomp.push(massofcomp.pop()*mul);
 				idx++;
 			}
 			if(ch=='H' && !checkInt(nextCh)) {
@@ -41,7 +50,7 @@ public class Molecules {
 			else if(ch=='H' && checkInt(nextCh)) {
 				nextCh-='0';
 				massofcomp.push(1*nextCh);
-				idx++;
+				//idx++;
 			}
 			if(ch=='O' && !checkInt(nextCh)) {
 				massofcomp.push(16);
@@ -51,7 +60,7 @@ public class Molecules {
 			else if(ch=='O' && checkInt(nextCh)) {
 				nextCh-='0';
 				massofcomp.push(16*nextCh);
-				idx++;
+				//idx++;
 			}
 			else if(ch=='(') {
 				massofcomp.push(-1);
@@ -67,7 +76,6 @@ public class Molecules {
 				massofcomp.push(ans);
 			}
 			
-			
 			idx++;
 		}
 		System.out.println(massofcomp);
@@ -75,7 +83,9 @@ public class Molecules {
 	}
 	public static void main(String[] args) {
 		Stack<Integer> st=new Stack<>();
-		 System.out.println(CalculateMass("CHOC(CH3)3", st));
+		Scanner sc=new Scanner(System.in);
+		String str=sc.nextLine();
+		 System.out.println(CalculateMass("C12H12O6", st));
 		
 		
 	}
